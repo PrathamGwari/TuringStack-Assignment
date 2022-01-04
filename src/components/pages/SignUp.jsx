@@ -20,7 +20,7 @@ function SignUp(props) {
     if (password !== confirmPassword) {
       return alert("password and confirm password do not match");
     }
-    if (!userExists(document.querySelector("#email-input").value)) {
+    if (userExists(document.querySelector("#email-input").value)) {
       return alert("User with this email already exists. Try loggin in");
     }
     const userData = JSON.stringify({

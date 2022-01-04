@@ -35,7 +35,6 @@ function Login(props) {
       <div className="row form-root">
         <div className="col d-flex justify-content-center align-content-center">
           <form
-            action="#"
             className="form-container py-2 px-5 my-auto border border-dark"
           >
             <h4 className="my-3">LOGIN</h4>

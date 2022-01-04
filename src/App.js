@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from "./components/pages/Home";
+import SignUp from "./components/pages/SignUp";
+import Login from "./components/pages/Login";
+import Dashboard from "./components/pages/Dashboard";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { connect } from "react-redux";
 
-function App() {
+function App(props) {
+  const {isAuthenticated, loggedInEmail} = props
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/login" element={isAuthenticated ? <Navigate to={`/dashboard/?email=${loggedInEmail}`}/> : <Login></Login>}/>
+          <Route path="/signup" element={isAuthenticated ? <Navigate to={`/dashboard/?email=${loggedInEmail}`}/> : <SignUp></SignUp>}/>
+          <Route path="/home" element={isAuthenticated ? <Home></Home> : <Navigate to='/login'/>} />
+          <Route path="/dashboard" element={isAuthenticated ? <Dashboard></Dashboard> : <Navigate to="/login"/>} />
+          <Route path="*" element={<Navigate to="/login"/>}/>
+        </Routes>
+      </Router>
+    </>
   );
 }
 
-export default App;
+const mapStateToProps = (state)=>{
+  return{
+    isAuthenticated: state.isAuthenticated,
+    loggedInEmail: state.loggedInEmail
+  }
+}
+
+export default connect(mapStateToProps, null)(App);

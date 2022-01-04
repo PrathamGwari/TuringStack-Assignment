@@ -14,8 +14,8 @@ function Login(props) {
   }
 
   const clickHandler = () => {
-    if (userExists(document.querySelector("#email-input").value) === null) {
-      return alert("Wrong credentials or you have not registered");
+    if (!userExists(document.querySelector("#email-input").value)) {
+      alert("Wrong credentials or you have not registered");
     } else {
       
       const {password} = JSON.parse(localStorage.getItem(document.getElementById('email-input').value))

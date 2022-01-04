@@ -14,9 +14,9 @@ function App(props) {
         <Routes>
           <Route path="/login" element={isAuthenticated ? <Navigate to={`/dashboard/?email=${loggedInEmail}`}/> : <Login></Login>}/>
           <Route path="/signup" element={isAuthenticated ? <Navigate to={`/dashboard/?email=${loggedInEmail}`}/> : <SignUp></SignUp>}/>
-          <Route path="/home" element={isAuthenticated ? <Home></Home> : <Navigate to='/login'/>} />
+          <Route path="/home" element={isAuthenticated ? <Navigate to={`/dashboard/?email=${loggedInEmail}`}/> : <Home></Home>} />
           <Route path="/dashboard" element={isAuthenticated ? <Dashboard></Dashboard> : <Navigate to="/login"/>} />
-          <Route path="*" element={<Navigate to="/login"/>}/>
+          <Route path="*" element={<Navigate to="/home"/>}/>
         </Routes>
       </Router>
     </>

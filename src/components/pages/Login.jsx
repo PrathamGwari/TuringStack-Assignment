@@ -25,7 +25,6 @@ function Login(props) {
       } 
     } else {
       alert("Wrong credentials or you have not registered");
-      <Navigate to="/login"/>
     }
   }
   
